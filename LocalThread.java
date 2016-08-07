@@ -4,7 +4,7 @@ import java.util.function.DoubleFunction;
  * Created by vlad on 06.08.2016.
  */
 public class LocalThread extends Thread {
-    double a, b, point;
+    double point;
     double result;
     double tolerance = 0.01;
     boolean flag;
@@ -15,9 +15,7 @@ public class LocalThread extends Thread {
         }
     };
 
-    public LocalThread(double a, double b, double point) {
-        this.a = a;
-        this.b = b;
+    public LocalThread(double point) {
         this.point = point;
         start();
     }
