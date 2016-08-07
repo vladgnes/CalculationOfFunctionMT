@@ -5,9 +5,10 @@ import java.util.function.DoubleFunction;
  */
 public class LocalThread extends Thread {
     double point;
-    double result;
+    double result = 5;
     double tolerance = 0.01;
     boolean flag = true;
+    double functionValue;
     DoubleFunction<Double> doubleFunction = new DoubleFunction<Double>() {
         @Override
         public Double apply(double value) {
@@ -17,11 +18,11 @@ public class LocalThread extends Thread {
 
     public LocalThread(double point) {
         this.point = point;
+        this.functionValue = doubleFunction.apply(point);
         start();
     }
 
     public void run() {
-        double functionValue = doubleFunction.apply(point);
 
         if (Math.abs(functionValue) < tolerance) {
             result = point;

@@ -7,10 +7,4 @@ public class Main {
         CalculationProcessor.calculation(a,b);
         System.out.println(CalculationProcessor.result);
     }
-
-
-
-
-
-
 }
