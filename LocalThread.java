@@ -12,7 +12,7 @@ public class LocalThread extends Thread {
     DoubleFunction<Double> doubleFunction = new DoubleFunction<Double>() {
         @Override
         public Double apply(double value) {
-            return Math.sin(value);
+            return (value*value*value) - 1;
         }
     };
 
