@@ -6,6 +6,7 @@ public class CalculationProcessor {
     public static double result = 0;
 
     public static void calculation(double a, double b){
+        double tolerance = 0.01;
         double second = (b + a)/2;
         double first = (a + second)/2;
         double third = (b + second)/2;
@@ -14,7 +15,7 @@ public class CalculationProcessor {
         for(int i = 0;i < 3;i++){
             localThreads[i] = new LocalThread(a,b,localPoints[i]);
             //tyt
-            if(localThreads[i].result != 0.0){
+            if(Math.abs(localThreads[i].result) < tolerance){
                 result = localThreads[i].result;
             }else{
                 flags[i] = localThreads[i].flag;
