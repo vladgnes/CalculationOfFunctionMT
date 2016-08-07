@@ -1,31 +1,48 @@
 import java.util.function.DoubleFunction;
 
-/**
- * Created by vlad on 06.08.2016.
- */
 public class Main {
-    public static void main(String [] args){
-        search(-0.8,0.5);
+    public static LocalThread [] localThreads = new LocalThread[3];
+    public static double result = 0;
 
+    public static void main(String [] args){
+        double a = -0.8;
+        double b = 0.5;
+        calculation(a,b);
+
+
+        System.out.println(result);
     }
-    public static void search(double a, double b){
-        DoubleFunction<Double> doubleFunction = new DoubleFunction<Double>() {
-            @Override
-            public Double apply(double value) {
-                return Math.sin(value);
+
+    public static void calculation(double a, double b){
+        double second = (b + a)/2;
+        double first = (a + second)/2;
+        double third = (b + second)/2;
+        double [] localPoints = {first,second,third};
+        boolean [] flags = new boolean[3];
+        for(int i = 0;i < 3;i++){
+            localThreads[i] = new LocalThread(a,b,localPoints[i]);
+            //tyt
+            if(localThreads[i].result != 0.0){
+                result = localThreads[i].result;
+                break;
+            }else{
+                flags[i] = localThreads[i].flag;
+                //flag == true, functionValue > 0
+                //flag == false, functionValue < 0
             }
-        };
-        double middle = (b+a)/2;
-        double functionValue = doubleFunction.apply(middle);
-        if( functionValue > 0){
-            search(a,middle);
-        }else if(functionValue < 0){
-            search(middle,b);
-        }else if(functionValue > - 0.009 || functionValue < 0.001){
-            System.out.println(middle);
+        }
+        if(flags[0]){
+            calculation(a,first);
+        }else if(!flags[0] && flags[1]){
+            calculation(first,second);
+        }else if(!flags[1] && flags[2]){
+            calculation(second,third);
+        }else if(!flags[2]){
+            calculation(third,b);
         }
 
     }
+
 
 
 
