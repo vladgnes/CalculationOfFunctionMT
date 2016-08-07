@@ -7,7 +7,7 @@ public class LocalThread extends Thread {
     double point;
     double result;
     double tolerance = 0.01;
-    boolean flag;
+    boolean flag = true;
     DoubleFunction<Double> doubleFunction = new DoubleFunction<Double>() {
         @Override
         public Double apply(double value) {

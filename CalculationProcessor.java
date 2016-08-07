@@ -6,7 +6,7 @@ public class CalculationProcessor {
     public static double result = 0;
 
     public static void calculation(double a, double b) throws InterruptedException {
-        double tolerance = 0.01;
+        double tolerance = 0.001;
         double second = (b + a)/2;
         double first = (a + second)/2;
         double third = (b + second)/2;
@@ -23,15 +23,18 @@ public class CalculationProcessor {
                 //flag == true, functionValue > 0
                 //flag == false, functionValue < 0
             }
-        }
-        if(flags[0]){
-            calculation(a,first);
-        }else if(!flags[0] && flags[1]){
-            calculation(first,second);
-        }else if(!flags[1] && flags[2]){
-            calculation(second,third);
-        }else if(!flags[2]){
-            calculation(third,b);
+            if(flags[0]) {
+                calculation(a, first);
+            }
+            if(!flags[0] && flags[1]){
+                calculation(first,second);
+            }
+            if(!flags[1] && flags[2]){
+                calculation(second,third);
+            }
+            if(!flags[2]){
+                calculation(third,b);
+            }
         }
     }
 }
