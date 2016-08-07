@@ -17,7 +17,7 @@ public class CalculationProcessor {
         for(int i = 0;i < 3;i++){
             localThreads[i] = new LocalThread(localPoints[i]);
             Thread.sleep(15);
-            if(Math.abs(localThreads[i].result) < tolerance){
+            if(Math.abs(localThreads[i].result - 1) < tolerance){
                 result = localThreads[i].result;
                 flag = true;
                 break;
